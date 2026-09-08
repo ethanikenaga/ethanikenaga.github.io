@@ -81,7 +81,7 @@ body {
 }
 
 main {
-  padding: 0 20px 40px 20px;
+  padding: 40px 20px 80px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -170,33 +170,37 @@ main {
 .about {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 20px;
-  background-color: #f8f8f8;
+  justify-content: center;
+  gap: 35px;
+
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px;
+
+  background-color: var(--cg-white);
   border: 1px solid #ccc;
   border-radius: 5px;
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 }
 
 .about-image img {
-  max-width: 300px;
+  display: block;
+  width: 280px;
+  height: 350px;
+  object-fit: cover;
   border-radius: 3px;
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
 }
 
 .about-text {
   flex: 1;
-  margin-left: 20px;
-}
-
-.about-text h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
+  margin-left: 0;
+  max-width: 550px;
 }
 
 .about-text p {
+  margin: 0;
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.7;
 }
 
 /* CSS for resume page */
