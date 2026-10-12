@@ -92,7 +92,7 @@ main {
   display: flex;
   justify-content: center;
   font-size: 40px;
-  font-family: Georgia;
+  font-family: "Quicksand", sans-serif;
 }
 
 /* CSS for portfolio grid */
