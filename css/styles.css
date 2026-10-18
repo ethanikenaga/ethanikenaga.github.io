@@ -190,6 +190,14 @@ main {
   border-radius: 3px;
 }
 
+.about-text .page-title {
+  justify-content: flex-start;
+}
+
+.about-text .page-title h1 {
+  margin: 0 0 20px 0;
+}
+
 .about-text {
   flex: 1;
   margin-left: 0;
