@@ -16,9 +16,8 @@ body {
   min-height: 100vh;
   padding: 0;
   margin: 0;
-  font-family: monospace;
+  font-family: "Quicksand", sans-serif;
 }
-
 /* CSS for navigation */
 
 .navbar {
@@ -60,7 +59,7 @@ body {
   text-decoration: none;
   letter-spacing: 2px;
 
-  font-family: monospace;
+  font-family: "Quicksand", sans-serif;
 }
 
 .navbar a:hover {
@@ -73,7 +72,7 @@ body {
 }
 
 .logo a {
-  font-family: Georgia;
+  font-family: "Quicksand", sans-serif;
 }
 
 .logo a:hover {
@@ -210,7 +209,7 @@ main {
   border: none;
   color: var(--cg-white);
 
-  font-family: monospace;
+  font-family: "Quicksand", sans-serif;
 
   padding: 5px 7px;
   text-align: center;
@@ -223,7 +222,7 @@ main {
 }
 
 .resume h2 {
-  font-family: Georgia;
+  font-family: "Quicksand", sans-serif;
 }
 
 /* CSS for contact form */
@@ -231,7 +230,7 @@ main {
 label {
   display: block;
   margin-bottom: 8px;
-  font-family: Georgia;
+  font-family: "Quicksand", sans-serif;
   font-weight: bold;
 }
 
