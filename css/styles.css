@@ -18,20 +18,22 @@ body {
   margin: 0;
   font-family: "Quicksand", sans-serif;
 }
-/* CSS for navigation */
 
+/* CSS for navigation */
 .navbar {
-  position: -webkit-sticky;
-  position: sticky;
+  position: fixed;
   top: 0;
-  width: 100%;
-  height: 7%;
+  left: 0;
+  width: 200px;
+  height: 100vh;
   z-index: 10;
 
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   text-align: center;
+  flex-direction:column;
+  gap: 30px;
 
   background-color: var(--cg-black);
   color: var(--cg-white);
@@ -43,11 +45,14 @@ body {
 
 .nav-list {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   position: relative;
-  right: 30px;
   list-style: none;
 
+  padding: 0;
+  margin: 0;
+
+  gap: 20px;
   /* Debug border */
   /* border: solid blue; */
 }
@@ -55,7 +60,7 @@ body {
 .navbar a {
   color: var(--cg-white);
   font-weight: bold;
-  margin: 0 12px;
+  margin: 0;
   text-decoration: none;
   letter-spacing: 2px;
 
