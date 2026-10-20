@@ -21,30 +21,34 @@ body {
 
 /* CSS for navigation */
 .navbar {
+  /* position */
   position: fixed;
   top: 0;
-  left: 0;
+  bottom: 0;
+  right: 0;
   width: 240px;
   height: 100vh;
   z-index: 10;
 
+  /* layout */
   display: flex;
-  justify-content: center;
-  /* aligns navbar to hug right*/
-  align-items: flex-end;   
-  text-align: right;       
-  padding-right: 20px; 
   flex-direction:column;
+  justify-content: center;
+  align-items: flex-start;   
+  text-align: left;
   gap: 30px;
+  padding: 0 0 0 30px;
+  text-align: left;      
+}
 
-  background-color: var(--cg-grey);
-  color: var(--cg-white);
-  padding: 0px 0px;
-
-  /* Debug border */
-  border-right: 3px solid rgb(200,200,200);
-  padding-right: 10px;
-  /* border: solid red; */
+.navbar::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 250px;        /* line starts 40px below the top of the navbar */
+  bottom: 350px;     /* line ends 80px above the bottom of the navbar */
+  width: 3px;
+  background: rgb(200, 200, 200);
 }
 
 .nav-list {
