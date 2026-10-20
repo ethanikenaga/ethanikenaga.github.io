@@ -77,11 +77,22 @@ body {
 
   font-size: 30px;
   font-family: "Quicksand", sans-serif;
+
+  display: inline-block;
+  transition: transform 1000s ease, color 1s ease;
+
+  padding: 4px 10px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
 }
 
 .navbar a:hover {
   color: var(--cg-blue);
-  text-decoration: underline;
+  transform: translateX(-8px);
+  transition: transform 0.2s ease, color 0.2s ease;   /* now */
+  background-color: rgba(36, 94, 255, 0.1);   /* --cg-blue at 10% opacity */
+  text-decoration: none;
 }
 
 .navbar a:active {
