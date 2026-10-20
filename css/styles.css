@@ -19,16 +19,53 @@ body {
   font-family: "Quicksand", sans-serif;
 }
 
+/* ===== Site header ===== */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto 30px;
+}
+
+.site-name {
+  margin: 20px 0 0;
+  font-size: 40px;
+}
+
+.site-tagline {
+  margin: 4px 0 0;
+  font-size: 14px;
+  font-weight: lighter;
+}
+
+.site-header-text {
+  margin-top: 120px;
+  margin-left: 40px;
+}
+
+
+.site-photo {
+  width: 120px;
+  height: 150px;
+  scale: 2;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 300px;
+  margin-top: 120px;
+}
+
+
 /* CSS for navigation */
 .navbar {
   /* position */
   position: fixed;
   top: 0;
-  bottom: 0;
   right: 0;
   width: 240px;
   height: 100vh;
-  z-index: 10;
+  z-index: 20;
 
   /* layout */
   display: flex;
@@ -37,16 +74,15 @@ body {
   align-items: flex-start;   
   text-align: left;
   gap: 30px;
-  padding: 0 0 0 30px;
-  text-align: left;      
+  padding: 0 0 0 30px; 
 }
 
 .navbar::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 250px;        /* line starts 40px below the top of the navbar */
-  bottom: 350px;     /* line ends 80px above the bottom of the navbar */
+  top: 250px;        /* line starts 250px below the top of the navbar */
+  bottom: 350px;     /* line ends 350px above the bottom of the navbar */
   width: 3px;
   background: rgb(200, 200, 200);
 }
@@ -57,7 +93,6 @@ body {
   position: relative;
   list-style: none;
 
-  position:relative;
   top: -65px;
 
   padding: 0;
@@ -79,12 +114,10 @@ body {
   font-family: "Quicksand", sans-serif;
 
   display: inline-block;
-  transition: transform 1000s ease, color 1s ease;
+  transition: transform 0.5s ease, color 0.5s ease;
 
   padding: 4px 10px;
   border-radius: 8px;
-  transition: background-color 0.2s ease, color 0.2s ease;
-
 }
 
 .navbar a:hover {
@@ -99,16 +132,8 @@ body {
   color: var(--cg-blue);
 }
 
-.logo a {
-  font-family: "Quicksand", sans-serif;
-}
-
-.logo a:hover {
-  text-decoration: None;
-}
-
 main {
-  padding: 40px 20px 80px 20px;
+  padding: 40px 260px 80px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -132,24 +157,6 @@ main {
 
   /* Debug border */
   /* border: 2px solid blue; */
-}
-
-.item-link {
-  width: 70%;
-
-  /* Debug border */
-  /* border: 2px solid red; */
-}
-
-.project-image {
-  object-fit: cover;
-  width: 100%;
-  height: 500px;
-  flex-basis: 50px;
-  flex-grow: 2;
-
-  /* Debug border */
-  /* border: 2px solid black; */
 }
 
 .project-details {
@@ -190,52 +197,6 @@ main {
 .project-name {
   font-weight: bold;
   font-size: 20px;
-}
-
-/* CSS for home page */
-
-.about {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 35px;
-
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 30px;
-
-  background-color: var(--cg-white);
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.about-image img {
-  display: block;
-  width: 280px;
-  height: 350px;
-  object-fit: cover;
-  border-radius: 3px;
-}
-
-.about-text .page-title {
-  justify-content: flex-start;
-}
-
-.about-text .page-title h1 {
-  margin: 0 0 20px 0;
-}
-
-.about-text {
-  flex: 1;
-  margin-left: 0;
-  max-width: 550px;
-}
-
-.about-text p {
-  margin: 0;
-  font-size: 16px;
-  line-height: 1.7;
 }
 
 /* CSS for resume page */
