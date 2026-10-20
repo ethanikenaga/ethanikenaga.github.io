@@ -222,6 +222,13 @@ form {
   margin: 0 auto;
 }
 
+/* Divider line */
+.divider {
+  border: none;                              /* removes the default 3D look */
+  border-top: 1px solid rgb(220, 220, 220);  /* thin light grey line */
+  margin: 0 48px;                            /* same side gap as the header text */
+}
+
 /* Home page */
 .home-content {
   min-height: 150vh;     /* two full screen heights of blank space; adjust to taste */
