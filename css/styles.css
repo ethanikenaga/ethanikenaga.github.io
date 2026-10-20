@@ -6,10 +6,6 @@
   --cg-white: rgb(255, 255, 255);
 }
 
-html {
-  height: 100%;
-}
-
 body {
   background: var(--cg-grey);
   position: relative;
@@ -40,11 +36,6 @@ body {
   font-weight: lighter;
 }
 
-.site-header-text {
-  margin-top: 120px;
-  margin-left: 40px;
-}
-
 
 .site-photo {
   width: 120px;
@@ -72,7 +63,6 @@ body {
   flex-direction:column;
   justify-content: center;
   align-items: flex-start;   
-  text-align: left;
   gap: 30px;
   padding: 0 0 0 30px; 
 }
@@ -106,7 +96,6 @@ body {
 .navbar a {
   color: var(--cg-black);
   font-weight: bold;
-  margin: 0;
   text-decoration: none;
   letter-spacing: 3px;
 
@@ -123,13 +112,7 @@ body {
 .navbar a:hover {
   color: var(--cg-blue);
   transform: translateX(-8px);
-  transition: transform 0.2s ease, color 0.2s ease;   /* now */
   background-color: rgba(36, 94, 255, 0.1);   /* --cg-blue at 10% opacity */
-  text-decoration: none;
-}
-
-.navbar a:active {
-  color: var(--cg-blue);
 }
 
 main {
@@ -188,10 +171,6 @@ main {
 .project-details a:hover {
   color: var(--cg-blue);
   text-decoration: underline;
-}
-
-.project-details {
-  font-weight: lighter;
 }
 
 .project-name {
