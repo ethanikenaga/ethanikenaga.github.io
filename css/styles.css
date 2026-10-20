@@ -61,7 +61,7 @@ body {
 /* CSS for navigation */
 .navbar {
   /* position */
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   width: 240px;
@@ -221,6 +221,13 @@ form {
   width: 500px;
   margin: 0 auto;
 }
+
+/* Home page */
+.home-content {
+  min-height: 150vh;     /* two full screen heights of blank space; adjust to taste */
+  width: 100%;
+}
+
 
 /* CSS for footer */
 
