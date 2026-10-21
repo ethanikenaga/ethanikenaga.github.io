@@ -112,12 +112,34 @@ body {
   background-color: rgba(36, 94, 255, 0.1);   /* --cg-blue at 10% opacity */
 }
 
+/* Home page: the navbar is the header's third grid column, so it ends at the divider */
+.site-header .navbar {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0;
+  justify-self: end;
+}
+
+.site-header .navbar .nav-list {
+  top: 0;
+}
+
+.site-header .navbar a {
+  margin-right: -11px;   /* cancels the link's right padding (8px) + trailing letter-spacing (3px) */
+}
+
 main {
   padding: 40px 260px 80px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+/* Home page has no sidebar below the line, so don't reserve space for one */
+.home main {
+  padding-right: 20px;
 }
 
 .page-title {
