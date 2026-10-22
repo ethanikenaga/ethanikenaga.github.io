@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom'
-import SiteHeader from './SiteHeader.jsx'
+import Header from './Header.jsx'
 import Footer from './Footer.jsx'
 
 function Layout() {
   return (
     <>
-      <SiteHeader />
+      <Header />
       <hr className="divider" />
       <main>
         <Outlet />
