@@ -1,14 +1,16 @@
 import type { Project } from '../data/projects'
 
-function ProjectCard({ title, year, gradient }: Project) {
+type Props = Project & { onSelect: () => void }
+
+function ProjectCard({ title, year, gradient }: Props) {
   return (
-    <article className="project-card" style={{ background: gradient }}>
+    <button type="button" className="project-card" style={{ background: gradient }} onClick ={onSelect}>
       <span className="project-card-placeholder">+ project image</span>
-      <p className="project-card-pill">
+      <span className="project-card-pill">
         {title}
         <span className="project-card-year">• {year}</span>
-      </p>
-    </article>
+      </span>
+    </button>
   )
 }
 
