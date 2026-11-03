@@ -117,7 +117,6 @@ main {
 
 /* Home page */
 .home-content {
-  max-width: 1280px;     /* two full screen heights of blank space; adjust to taste */
   width: 100%;
 }
 
