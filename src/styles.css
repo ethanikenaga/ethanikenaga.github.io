@@ -121,25 +121,16 @@ main {
 }
 
 /* Work cards */
-.work-eyebrow {
-  margin: 0;
-  font-family: "DM Mono", monospace;
-  font-size: 12px;
-  letter-spacing: 1.2px;
-  color: #ff7a45;
-}
-
-.work-title {
-  margin: 8px 0 24px;
-  font-size: 52px;
-  letter-spacing: -0.78px;
-  color: #1f1e1c;
-}
-
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 32px;
+}
+
+@media (max-width:720px){
+  .project-grid{
+    grid-template-columns: fr;
+  }
 }
 
 .project-card {
