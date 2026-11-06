@@ -167,6 +167,51 @@ main {
   color: #9a968f;
 }
 
+/* project dialog */
+.project-dialog {
+  border: none;
+  border-radius: 16px;
+  padding: 0;
+  width: min(90vw, 560px);
+  background: var(--cg-white);
+  color: var(--cg-black);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.project-dialog::backdrop {
+  background: rgba(30, 32, 32, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.project-dialog-body {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.project-dialog-body h3 {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.project-dialog-year {
+  margin: 0;
+  color: rgba(30, 32, 32, 0.6);
+}
+
+.project-dialog-body button {
+  align-self: flex-end;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 999px;
+  background: var(--cg-blue);
+  color: var(--cg-white);
+  font: inherit;
+  cursor: pointer;
+}
+
+
 /* CSS for footer */
 
 .footer {
