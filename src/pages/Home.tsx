@@ -1,25 +1,34 @@
-
 import { useState } from 'react'
 import ProjectCard from '../components/ProjectCard'
 import ProjectDialog from '../components/ProjectDialog'
 import { projects } from '../data/projects'
-import type { Project } from '../data/projects'
 
 function Home() {
-  const [selected, setSelected] = useState<Project | null>(null)
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
+  const selected = selectedIndex === null ? null : projects[selectedIndex]
 
-  return(
-      <section className="home-content">
+  return (
+    <section className="home-content">
       <div className="project-grid">
-        {projects.map((project) => (
+        {projects.map((project, i) => (
           <ProjectCard
-            key={project.title}
-            {...project}
-            onSelect={() => setSelected(project)}
+            key={project.slug}
+            title={project.title}
+            year={project.year}
+            gradient={project.gradient}
+            image={project.image}
+            onSelect={() => setSelectedIndex(i)}
           />
         ))}
       </div>
-       <ProjectDialog project={selected} onClose={() => setSelected(null)} />
+
+      <ProjectDialog
+        project={selected}
+        onClose={() => setSelectedIndex(null)}
+        onNext={() =>
+          setSelectedIndex((i) => (i === null ? null : (i + 1) % projects.length))
+        }
+      />
     </section>
   )
 }
