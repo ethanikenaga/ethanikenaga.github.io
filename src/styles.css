@@ -120,33 +120,47 @@ main {
   width: 100%;
 }
 
-/* Work cards */
+//* Work cards */
 .project-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 32px;
 }
 
-@media (max-width:720px){
-  .project-grid{
-    grid-template-columns: fr;
+@media (max-width: 720px) {
+  .project-grid {
+    grid-template-columns: 1fr;
   }
 }
 
 .project-card {
   position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  text-align: left;
   aspect-ratio: 624 / 380;
   border-radius: 22px;
   overflow: hidden;
 }
 
-.project-card-placeholder {
+.project-card-button {
+  cursor: pointer;
+}
+
+.project-card-button:focus-visible {
+  outline: 3px solid var(--cg-blue);
+  outline-offset: 4px;
+}
+
+.project-card-art {
   position: absolute;
   inset: 0;
-  display: grid;
-  place-items: center;
-  font: 13px "DM Mono", monospace;
-  color: #6b675f;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .project-card-pill {
@@ -167,14 +181,16 @@ main {
   color: #9a968f;
 }
 
-/* project dialog */
+/* Project popup */
 .project-dialog {
-  border: none;
-  border-radius: 16px;
+  width: min(92vw, 1000px);
+  max-height: min(92vh, 1040px);
   padding: 0;
-  width: min(90vw, 560px);
-  background: var(--cg-white);
-  color: var(--cg-black);
+  border: none;
+  border-radius: 24px;
+  overflow-y: auto; /* the long popup scrolls inside itself */
+  background: #fdfcf8;
+  color: #1f1e1c;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
 }
 
@@ -183,34 +199,181 @@ main {
   backdrop-filter: blur(4px);
 }
 
-.project-dialog-body {
-  padding: 32px;
+.project-dialog[open] {
+  animation: dialog-in 0.3s ease-out;
+}
+
+.project-dialog[open]::backdrop {
+  animation: backdrop-in 0.3s ease-out;
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* stop the page behind the popup from scrolling */
+body:has(.project-dialog[open]) {
+  overflow: hidden;
+}
+
+/* top bar stays pinned while the content scrolls */
+.project-dialog-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px;
+  background: #fdfcf8;
+  border-bottom: 1px solid #ebe5da;
+  font: 12px "DM Mono", monospace;
+  letter-spacing: 0.08em;
+  color: #6b675f;
 }
 
-.project-dialog-body h3 {
-  margin: 0;
-  font-size: 1.75rem;
-}
-
-.project-dialog-year {
-  margin: 0;
-  color: rgba(30, 32, 32, 0.6);
-}
-
-.project-dialog-body button {
-  align-self: flex-end;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 999px;
-  background: var(--cg-blue);
-  color: var(--cg-white);
-  font: inherit;
+.project-dialog-close {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: #f3efe8;
+  color: #1f1e1c;
+  font-size: 20px;
+  line-height: 1;
   cursor: pointer;
 }
 
+.project-dialog-close:hover {
+  background: #e9e3d8;
+}
+
+.project-dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 28px 64px 56px;
+}
+
+.project-eyebrow {
+  margin: 0;
+  font: 11px "DM Mono", monospace;
+  letter-spacing: 0.1em;
+  color: #b3492e;
+}
+
+.project-dialog-body h2 {
+  margin: 0;
+  font-size: 44px;
+  line-height: 1.15;
+}
+
+.project-tagline {
+  margin: 0;
+  font-size: 17px;
+  color: #5f5b54;
+}
+
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 40px;
+  margin: 0;
+  padding: 16px 0;
+  border-top: 1px solid #ebe5da;
+  border-bottom: 1px solid #ebe5da;
+}
+
+.project-meta dt {
+  margin-bottom: 4px;
+  font: 11px "DM Mono", monospace;
+  letter-spacing: 0.1em;
+  color: #8e8a82;
+}
+
+.project-meta dd {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.project-links {
+  display: flex;
+  gap: 16px;
+}
+
+.project-links a {
+  color: #b3492e;
+}
+
+.project-figure {
+  margin: -12px 0 0;
+  font: 11px "DM Mono", monospace;
+  color: #8e8a82;
+}
+
+.project-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 24px;
+}
+
+.project-section-label {
+  margin: 0;
+  font: 11px "DM Mono", monospace;
+  letter-spacing: 0.1em;
+  color: #b3492e;
+}
+
+.project-section h3 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+.project-section p:not(.project-section-label) {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #4a4640;
+}
+
+.project-next {
+  align-self: flex-start;
+  margin-top: 12px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f1e1c;
+  cursor: pointer;
+}
+
+.project-next:hover {
+  color: var(--cg-blue);
+}
+
+@media (max-width: 720px) {
+  .project-dialog-body {
+    padding: 24px 24px 40px;
+  }
+
+  .project-dialog-body h2 {
+    font-size: 34px;
+  }
+}
 
 /* CSS for footer */
 
