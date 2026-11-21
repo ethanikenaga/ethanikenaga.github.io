@@ -164,6 +164,87 @@ main {
   /* the motion lives inside each SVG in public/images/projects */
 }
 
+/* JSA card: the live opening scene. Laid out for a 624 x 380 card, then scaled to fit (--s). */
+.card-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.card-scene-stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 624px;
+  height: 380px;
+  overflow: hidden;
+  transform-origin: 0 0;
+  transform: scale(var(--s, 1));
+  background: linear-gradient(180deg, #efefef 0%, #e8e8e8 100%);
+}
+
+.cs-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #fff7f4 0%, #ffe6e2 100%);
+}
+
+/* the framed site window: inset on the sides and top, running off the bottom edge */
+.cs-site {
+  position: absolute;
+  left: 43px;
+  top: 52px;
+  width: 538px;
+  height: 328px;
+  opacity: 0;
+  background: #fff;
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 -4px 16px rgba(0, 0, 0, 0.16), 0 8px 30px rgba(0, 0, 0, 0.22);
+}
+
+/* hides the real header logo in the screenshot until the sun has landed on it */
+.cs-patch {
+  position: absolute;
+  left: 93.3px;
+  top: 54.9px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 2px 1px #fff;
+  opacity: 0;
+}
+
+.cs-abs {
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform;
+}
+
+.cs-halo {
+  width: 290px;
+  height: 290px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+}
+
+.cs-glow {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 120, 120, 0.55) 0%, rgba(255, 150, 150, 0.25) 45%, rgba(255, 180, 180, 0) 70%);
+  filter: blur(10px);
+}
+
+.cs-sun {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff7c6e 0%, #f2484c 55%, #e3333f 100%);
+}
+
 .project-card-pill {
   position: absolute;
   left: 20px;

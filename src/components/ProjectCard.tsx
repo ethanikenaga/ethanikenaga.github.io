@@ -27,14 +27,11 @@ function ProjectCard({ title, year, gradient, image, video, variant = 'card', on
       aria-haspopup="dialog"
       aria-label={`Open ${title} project`}
     >
-      {/* the video already has the title pill drawn into it */}
       {video ? <CardVideo src={video} /> : art}
-      {!video && (
-        <span className="project-card-pill">
-          {title}
-          <span className="project-card-year">• {year}</span>
-        </span>
-      )}
+      <span className="project-card-pill">
+        {title}
+        <span className="project-card-year">• {year}</span>
+      </span>
     </button>
   )
 }
