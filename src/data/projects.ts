@@ -31,7 +31,7 @@ export const projects: Project[] = [
     team: 'Student engineers',
     links: [{ label: 'Visit site', href: 'https://hack4impact.org' }], // TODO: confirm link
     gradient: 'linear-gradient(148.66deg, #6a94ee 0%, #3a5cc4 71.4%)',
-    // image: '/images/projects/hack4impact.png',
+    image: '/images/projects/hack4impact.svg',
     sections: [
       {
         label: 'THE PROJECT',
@@ -61,7 +61,7 @@ export const projects: Project[] = [
       { label: 'View code', href: 'https://github.com/jsacalpoly/jsa-calpoly' },
     ],
     gradient: 'linear-gradient(148.66deg, #fff8f5 0%, #fde4df 100%)',
-    // image: '/images/projects/jsa.png',
+    image: '/images/projects/jsa.svg',
     sections: [
       {
         label: 'THE PROJECT',
