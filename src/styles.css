@@ -161,28 +161,7 @@ main {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  animation: card-art-float 6s ease-in-out infinite;
-  transition: transform 0.5s ease;
-}
-
-.project-card-button:hover .project-card-art {
-  transform: scale(1.06);
-}
-
-@keyframes card-art-float {
-  0%,
-  100% {
-    translate: 0 0;
-  }
-  50% {
-    translate: 0 -6px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .project-card-art {
-    animation: none;
-  }
+  /* the motion lives inside each SVG in public/images/projects */
 }
 
 .project-card-pill {
