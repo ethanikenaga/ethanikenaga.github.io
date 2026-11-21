@@ -1,11 +1,12 @@
 import type { Project } from '../data/projects'
+import CardVideo from './CardVideo'
 
-type Props = Pick<Project, 'title' | 'year' | 'gradient' | 'image'> & {
+type Props = Pick<Project, 'title' | 'year' | 'gradient' | 'image' | 'video'> & {
   variant?: 'card' | 'hero'
   onSelect?: () => void
 }
 
-function ProjectCard({ title, year, gradient, image, variant = 'card', onSelect }: Props) {
+function ProjectCard({ title, year, gradient, image, video, variant = 'card', onSelect }: Props) {
   const art = image ? <img className="project-card-art" src={image} alt="" /> : null
 
   // The big card inside the popup: no title pill, not clickable
@@ -26,11 +27,14 @@ function ProjectCard({ title, year, gradient, image, variant = 'card', onSelect 
       aria-haspopup="dialog"
       aria-label={`Open ${title} project`}
     >
-      {art}
-      <span className="project-card-pill">
-        {title}
-        <span className="project-card-year">• {year}</span>
-      </span>
+      {/* the video already has the title pill drawn into it */}
+      {video ? <CardVideo src={video} /> : art}
+      {!video && (
+        <span className="project-card-pill">
+          {title}
+          <span className="project-card-year">• {year}</span>
+        </span>
+      )}
     </button>
   )
 }

@@ -17,6 +17,7 @@ function Home() {
             year={project.year}
             gradient={project.gradient}
             image={project.image}
+            video={project.video}
             onSelect={() => setSelectedIndex(i)}
           />
         ))}

@@ -17,6 +17,7 @@ export type Project = {
   links: ProjectLink[]
   gradient: string
   image?: string
+  video?: string // autoplaying video on the home card, path without extension
   sections: ProjectSection[]
 }
 
@@ -62,6 +63,7 @@ export const projects: Project[] = [
     ],
     gradient: 'linear-gradient(148.66deg, #fff8f5 0%, #fde4df 100%)',
     image: '/images/projects/jsa.svg',
+    video: '/cards/jsa-card',
     sections: [
       {
         label: 'THE PROJECT',
