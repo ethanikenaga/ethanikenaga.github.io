@@ -19,6 +19,29 @@ function ProjectDialog({ project, onClose, onNext }: Props) {
     if (project) dialog.scrollTop = 0 // each project starts at the top
   }, [project])
 
+  // The popup is designed at 1000 x 1040 (see the Figma). On a screen too small for that, shrink
+  // the whole popup to fit, so it keeps the same proportions and the full card stays visible.
+  useEffect(() => {
+    const dialog = ref.current
+    if (!dialog) return
+    const fit = () => {
+      const scale = Math.min(1, (window.innerHeight * 0.92) / 1040, (window.innerWidth * 0.92) / 1000)
+      if (scale >= 1 || window.innerWidth <= 720) {
+        // big screens use the CSS as is; phones use the stacked layout
+        dialog.style.zoom = ''
+        dialog.style.width = ''
+        dialog.style.maxHeight = ''
+      } else {
+        dialog.style.zoom = String(scale)
+        dialog.style.width = '1000px'
+        dialog.style.maxHeight = '1040px'
+      }
+    }
+    fit()
+    window.addEventListener('resize', fit)
+    return () => window.removeEventListener('resize', fit)
+  }, [])
+
   return (
     <dialog
       ref={ref}
