@@ -430,23 +430,6 @@ body:has(.project-dialog[open]) {
   color: #4a4640;
 }
 
-.project-next {
-  align-self: flex-start;
-  margin-top: 12px;
-  padding: 0;
-  border: 0;
-  background: none;
-  font: inherit;
-  font-size: 28px;
-  font-weight: 700;
-  color: #1f1e1c;
-  cursor: pointer;
-}
-
-.project-next:hover {
-  color: var(--cg-blue);
-}
-
 @media (max-width: 720px) {
   .project-dialog-body {
     padding: 24px 24px 40px;

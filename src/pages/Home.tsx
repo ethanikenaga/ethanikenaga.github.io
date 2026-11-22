@@ -23,13 +23,7 @@ function Home() {
         ))}
       </div>
 
-      <ProjectDialog
-        project={selected}
-        onClose={() => setSelectedIndex(null)}
-        onNext={() =>
-          setSelectedIndex((i) => (i === null ? null : (i + 1) % projects.length))
-        }
-      />
+      <ProjectDialog project={selected} onClose={() => setSelectedIndex(null)} />
     </section>
   )
 }

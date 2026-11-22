@@ -5,10 +5,9 @@ import type { Project } from '../data/projects'
 type Props = {
   project: Project | null
   onClose: () => void
-  onNext: () => void
 }
 
-function ProjectDialog({ project, onClose, onNext }: Props) {
+function ProjectDialog({ project, onClose }: Props) {
   const ref = useRef<HTMLDialogElement>(null)
 
   useEffect(() => {
@@ -116,10 +115,6 @@ function ProjectDialog({ project, onClose, onNext }: Props) {
                 ))}
               </section>
             ))}
-
-            <button type="button" className="project-next" onClick={onNext}>
-              Next project →
-            </button>
           </div>
         </>
       )}
