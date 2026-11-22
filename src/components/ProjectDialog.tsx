@@ -114,6 +114,7 @@ function ProjectDialog({ project, onClose }: Props) {
                   year={project.year}
                   gradient={project.gradient}
                   image={project.image}
+                  video={project.video}
                 />
               </div>
             </div>

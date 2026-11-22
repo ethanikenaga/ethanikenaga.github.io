@@ -5,6 +5,8 @@ type Props = {
   /** path without extension, e.g. "/cards/jsa-card".
    *  Needs jsa-card.mp4 (the site tour) and jsa-card-site.jpg (its first frame) next to it. */
   src: string
+  /** start the tour without waiting for the page to be scrolled (used inside the popup) */
+  eager?: boolean
 }
 
 // The five petals of the sakura, as in the logo
@@ -29,7 +31,7 @@ function Flower({ petal, centre, centreFill }: { petal: string; centre: boolean;
 //   3. tour    that last frame is identical to the first frame of the tour video, which now takes over
 //              and plays through the site; its last frame is the idle state again, so it loops
 // It never pauses when scrolled away. Reduced motion: a still of the idle scene, nothing else.
-function CardVideo({ src }: Props) {
+function CardVideo({ src, eager = false }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const stageRef = useRef<HTMLDivElement>(null)
@@ -79,7 +81,7 @@ function CardVideo({ src }: Props) {
     let idleBase = performance.now() // ti = seconds since the idle motion was last at rest
     let flightStart = 0
     let visible = false // is 80% of the card on screen?
-    let scrolled = false // has the visitor scrolled yet?
+    let scrolled = eager // has the visitor scrolled yet? (not needed inside the popup)
     let repeat = false // after the first tour the cycle repeats by itself
     let broken = false // the tour video could not play: stay on the idle scene
     let raf = 0

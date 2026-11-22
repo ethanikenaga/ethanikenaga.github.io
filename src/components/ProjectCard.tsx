@@ -9,11 +9,12 @@ type Props = Pick<Project, 'title' | 'year' | 'gradient' | 'image' | 'video'> & 
 function ProjectCard({ title, year, gradient, image, video, variant = 'card', onSelect }: Props) {
   const art = image ? <img className="project-card-art" src={image} alt="" /> : null
 
-  // The big card inside the popup: no title pill, not clickable
+  // The big card inside the popup: no title pill, not clickable. It plays the real card
+  // (the site tour) when the project has one; "eager" because the visitor already clicked in.
   if (variant === 'hero') {
     return (
       <div className="project-card" style={{ background: gradient }}>
-        {art}
+        {video ? <CardVideo src={video} eager /> : art}
       </div>
     )
   }
