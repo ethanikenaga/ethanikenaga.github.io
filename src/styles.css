@@ -117,8 +117,409 @@ main {
 
 /* Home page */
 .home-content {
-  min-height: 150vh;     /* two full screen heights of blank space; adjust to taste */
   width: 100%;
+}
+
+/* Work cards */
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+@media (max-width: 720px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.project-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  text-align: left;
+  aspect-ratio: 624 / 380;
+  border-radius: 22px;
+  overflow: hidden;
+}
+
+.project-card-button {
+  cursor: pointer;
+}
+
+.project-card-button:focus-visible {
+  outline: 3px solid var(--cg-blue);
+  outline-offset: 4px;
+}
+
+.project-card-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* the motion lives inside each SVG in public/images/projects */
+}
+
+/* JSA card: the live opening scene. Laid out for a 624 x 380 card, then scaled to fit (--s). */
+.card-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.card-scene-stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 624px;
+  height: 380px;
+  overflow: hidden;
+  transform-origin: 0 0;
+  transform: scale(var(--s, 1));
+  background: linear-gradient(180deg, #efefef 0%, #e8e8e8 100%);
+}
+
+.cs-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #fff7f4 0%, #ffe6e2 100%);
+}
+
+/* the framed site window: inset on the sides and top, running off the bottom edge */
+.cs-site {
+  position: absolute;
+  left: 43px;
+  top: 52px;
+  width: 538px;
+  height: 328px;
+  opacity: 0;
+  background: #fff;
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 -4px 16px rgba(0, 0, 0, 0.16), 0 8px 30px rgba(0, 0, 0, 0.22);
+}
+
+/* hides the real header logo in the screenshot until the sun has landed on it */
+.cs-patch {
+  position: absolute;
+  left: 93.3px;
+  top: 54.9px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 2px 1px #fff;
+  opacity: 0;
+}
+
+.cs-abs {
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform;
+}
+
+.cs-halo {
+  width: 290px;
+  height: 290px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+}
+
+.cs-glow {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 120, 120, 0.55) 0%, rgba(255, 150, 150, 0.25) 45%, rgba(255, 180, 180, 0) 70%);
+  filter: blur(10px);
+}
+
+.cs-sun {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff7c6e 0%, #f2484c 55%, #e3333f 100%);
+}
+
+.project-card-pill {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  margin: 0;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+  font-size: 18px;
+  font-weight: 500;
+  color: #1f1e1c;
+}
+
+.project-card-year {
+  margin-left: 10px;
+  color: #9a968f;
+}
+
+/* Project popup */
+.project-dialog {
+  width: min(92vw, 1240px);
+  max-height: min(92vh, 820px);
+  padding: 0;
+  border: none;
+  border-radius: 24px;
+  overflow-y: auto; /* the long popup scrolls inside itself */
+  background: #fdfcf8;
+  color: #1f1e1c;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.project-dialog::backdrop {
+  background: rgba(30, 32, 32, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.project-dialog[open] {
+  animation: dialog-in 0.3s ease-out;
+}
+
+.project-dialog[open]::backdrop {
+  animation: backdrop-in 0.3s ease-out;
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* stop the page behind the popup from scrolling */
+body:has(.project-dialog[open]) {
+  overflow: hidden;
+}
+
+/* top bar stays pinned while the content scrolls */
+.project-dialog-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  background: #fdfcf8;
+  border-bottom: 1px solid rgba(31, 30, 28, 0.14);
+  font: 13px "DM Mono", monospace;
+  color: #6b675f;
+}
+
+.project-dialog-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 22px;
+  background: rgba(31, 30, 28, 0.06);
+  cursor: pointer;
+}
+
+.project-dialog-close:hover {
+  background: rgba(31, 30, 28, 0.12);
+}
+
+.project-dialog-body {
+  padding: 28px 48px 64px;
+}
+
+/* top: title and details on the left, hero card on the right */
+.project-top {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+  padding-bottom: 28px;
+}
+
+.project-top-left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: none;
+  width: 360px;
+}
+
+.project-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.project-dialog-body h2 {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 52px;
+  letter-spacing: -0.96px;
+  color: #1f1e1c;
+}
+
+.project-subtitle {
+  margin: 0;
+  font-size: 17px;
+  line-height: 25px;
+  color: #3d3a36;
+}
+
+.project-meta {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.project-meta > div {
+  display: flex;
+  align-items: flex-start;
+  padding: 7px 0;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.project-meta dt {
+  flex: none;
+  width: 100px;
+  font-size: 14px;
+  color: #6b675f;
+}
+
+.project-meta dd {
+  margin: 0;
+  font-size: 16px;
+  color: #1f1e1c;
+}
+
+.project-meta a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.project-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.project-hero {
+  flex: 1;
+  min-width: 0;
+  max-width: 736px;
+}
+
+.project-section {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  padding: 44px 0;
+}
+
+.project-section-text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* text-only sections keep to a narrower column, like the design */
+.project-section:not(.has-image) .project-section-text {
+  flex: none;
+  width: 640px;
+  max-width: 100%;
+}
+
+.project-section.image-right {
+  flex-direction: row-reverse;
+}
+
+.project-section-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 560px;
+  height: 350px;
+  border-radius: 12px;
+  background: #eee8dd;
+  font-size: 14px;
+  color: #6b675f;
+  text-align: center;
+}
+
+.project-section h3 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: -0.28px;
+  color: #1f1e1c;
+}
+
+.project-section p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 28px;
+  color: #3d3a36;
+}
+
+@media (max-width: 720px) {
+  .project-dialog-bar {
+    padding: 14px 20px;
+  }
+
+  .project-dialog-body {
+    padding: 24px 24px 40px;
+  }
+
+  .project-top,
+  .project-section,
+  .project-section.image-right {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+
+  .project-top-left,
+  .project-section:not(.has-image) .project-section-text {
+    width: auto;
+  }
+
+  .project-hero {
+    max-width: none;
+  }
+
+  .project-section {
+    padding: 28px 0;
+  }
+
+  .project-section-image {
+    width: auto;
+    height: 220px;
+  }
+
+  .project-dialog-body h2 {
+    font-size: 36px;
+    line-height: 40px;
+  }
 }
 
 /* CSS for footer */
