@@ -93,7 +93,6 @@ export const projects: Project[] = [
       { label: 'JSA Github', href: 'https://github.com/jsacalpoly/jsa-calpoly' },
     ],
     gradient: 'linear-gradient(148.66deg, #fff8f5 0%, #fde4df 100%)',
-    image: '/images/projects/jsa.svg',
     video: '/cards/jsa-card',
     sections: [
       {
