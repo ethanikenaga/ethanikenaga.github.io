@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Navbar from './Navbar.tsx'
 
 function Header() {
@@ -17,15 +18,15 @@ function Header() {
       </div>
 
       <div className="polaroid-stack" tabIndex={0}>
-        <figure className="polaroid polaroid-about" aria-hidden="true">
+        <Link className="polaroid polaroid-about" to="/about" aria-label="About">
           <div className="polaroid-photo placeholder-green">+ hobby photo</div>
-        </figure>
-        <figure className="polaroid polaroid-life" aria-hidden="true">
+        </Link>
+        <Link className="polaroid polaroid-life" to="/expression" aria-label="Expression">
           <div className="polaroid-photo placeholder-blue">+ candid / campus</div>
-        </figure>
-        <figure className="polaroid polaroid-me">
+        </Link>
+        <Link className="polaroid polaroid-me" to="/" aria-label="Work">
           <img className="polaroid-photo" src="/images/me.JPG" alt="A headshot photo of me!" />
-        </figure>
+        </Link>
       </div>
 
       <Navbar />

@@ -45,6 +45,7 @@ body {
   --polaroid-size: 0.7;
   --u: calc(min(1px, 100vw / 1440) * var(--polaroid-size));
   position: relative;
+  isolation: isolate; /* keeps the hover strip below behind the cards, but above the page */
   width: calc(246 * var(--u));
   height: calc(318 * var(--u));
   outline: none;
@@ -54,6 +55,9 @@ body {
   position: absolute;
   inset: 0;
   margin: 0;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -102,6 +106,7 @@ div.polaroid-photo {
 .polaroid-stack:hover::after {
   content: "";
   position: absolute;
+  z-index: -1; /* behind the cards, so they stay clickable */
   top: 0;
   bottom: 0;
   left: calc(-282 * var(--u));
