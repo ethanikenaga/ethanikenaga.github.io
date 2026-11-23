@@ -32,13 +32,6 @@ body {
   font-size: 40px;
 }
 
-.site-label{
-  margin: 0;
-  font-size: 11px;
-  letter-spacing: 2px;
-  color: grey;
-}
-
 .site-tagline {
   margin: 4px 0 0;
   font-size: 14px;
@@ -76,13 +69,6 @@ body {
   width: calc(219.76 * var(--u));
   height: calc(246 * var(--u));
   object-fit: cover;
-}
-
-.polaroid figcaption {
-  font-family: "Caveat", cursive;
-  font-size: calc(24.6 * var(--u));
-  color: #2a2724;
-  white-space: nowrap;
 }
 
 /* the two cards behind are placeholders until there are photos for them */
