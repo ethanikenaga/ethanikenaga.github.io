@@ -205,7 +205,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  animation: page-in 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: page-in 0.4s ease; /* same speed as the polaroids */
 }
 
 @keyframes page-in {
@@ -216,8 +216,29 @@ main {
   }
 }
 
+/* The home page animates its project cards one by one instead, so the page itself holds still */
+.page-transition:has(.project-grid) {
+  animation: none;
+}
+
+.project-grid > .project-card {
+  animation: card-in 0.4s ease both; /* same speed as the polaroids */
+}
+
+.project-grid > .project-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .page-transition {
+  .page-transition,
+  .project-grid > .project-card {
     animation: none;
   }
 }
