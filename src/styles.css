@@ -46,9 +46,11 @@ body {
 }
 
 /* Header photo: a stack of polaroids that fans out on hover or focus.
-   Sized from the Figma (a 1440px wide page), then shrunk with the window: 1 unit = --u. */
+   Sized from the Figma (a 1440px wide page), then shrunk with the window: 1 unit = --u.
+   --polaroid-size is the one number to change: 1 is the Figma size, 0.7 is 70% of it. */
 .polaroid-stack {
-  --u: min(1px, calc(100vw / 1440));
+  --polaroid-size: 0.7;
+  --u: calc(min(1px, 100vw / 1440) * var(--polaroid-size));
   position: relative;
   width: calc(246 * var(--u));
   height: calc(318 * var(--u));
