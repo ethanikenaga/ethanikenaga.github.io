@@ -38,12 +38,16 @@ body {
   font-weight: lighter;
 }
 
-/* Header photo: a stack of polaroids that fans out on hover or focus.
+/* Header photo: a stack of polaroids. They fan out into a row while the mouse is over them, and
+   fall back into a stack when one is clicked. The polaroid for the current page sits on top.
    Sized from the Figma (a 1440px wide page), then shrunk with the window: 1 unit = --u.
    --polaroid-size is the one number to change: 1 is the Figma size, 0.7 is 70% of it. */
 .polaroid-stack {
   --polaroid-size: 0.7;
   --u: calc(min(1px, 100vw / 1440) * var(--polaroid-size));
+  /* the two tilted poses of the cards that sit under the top one */
+  --tilt-a: translate(calc(-30 * var(--u)), calc(7 * var(--u))) rotate(7deg);
+  --tilt-b: translate(calc(30 * var(--u)), calc(9 * var(--u))) rotate(-6deg);
   position: relative;
   isolation: isolate; /* keeps the hover strip below behind the cards, but above the page */
   width: calc(246 * var(--u));
@@ -58,6 +62,7 @@ body {
   color: inherit;
   text-decoration: none;
   cursor: pointer;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -92,18 +97,30 @@ div.polaroid-photo {
   background: #cfdce6;
 }
 
-.polaroid-about {
-  transform: translate(calc(-30 * var(--u)), calc(7 * var(--u))) rotate(7deg);
+/* resting pile: the top card lies flat, the other two tilt under it */
+.polaroid-stack[data-top="work"] .polaroid-work,
+.polaroid-stack[data-top="about"] .polaroid-about,
+.polaroid-stack[data-top="expression"] .polaroid-expression {
+  z-index: 3;
+  transform: none;
 }
 
-.polaroid-life {
-  transform: translate(calc(30 * var(--u)), calc(9 * var(--u))) rotate(-6deg);
+.polaroid-stack[data-top="work"] .polaroid-about,
+.polaroid-stack[data-top="expression"] .polaroid-about,
+.polaroid-stack[data-top="about"] .polaroid-work {
+  transform: var(--tilt-a);
+}
+
+.polaroid-stack[data-top="work"] .polaroid-expression,
+.polaroid-stack[data-top="about"] .polaroid-expression,
+.polaroid-stack[data-top="expression"] .polaroid-work {
+  transform: var(--tilt-b);
 }
 
 /* While fanned out, the gaps between the cards are outside the stack's own box, so the mouse
    would leave it, the cards would close, and it would flicker. This invisible strip covers the
-   whole spread, gaps included, and only exists while hovered. */
-.polaroid-stack:hover::after {
+   whole spread, gaps included, and only exists while fanned out. */
+.polaroid-stack.is-spread::after {
   content: "";
   position: absolute;
   z-index: -1; /* behind the cards, so they stay clickable */
@@ -113,15 +130,19 @@ div.polaroid-photo {
   right: calc(-282 * var(--u));
 }
 
-.polaroid-stack:hover .polaroid-about,
-.polaroid-stack:focus-within .polaroid-about {
+/* fanned out: left, middle and right in a row, always About, Work, Expression */
+.polaroid-stack.is-spread .polaroid-about {
   transform: translateX(calc(-282 * var(--u)));
 }
 
-.polaroid-stack:hover .polaroid-life,
-.polaroid-stack:focus-within .polaroid-life {
+.polaroid-stack.is-spread .polaroid-work {
+  transform: none;
+}
+
+.polaroid-stack.is-spread .polaroid-expression {
   transform: translateX(calc(282 * var(--u)));
 }
+
 
 /* Navbar */
 .nav-list {
