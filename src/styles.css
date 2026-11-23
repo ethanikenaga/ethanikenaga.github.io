@@ -110,6 +110,18 @@ div.polaroid-photo {
   transform: translate(calc(30 * var(--u)), calc(9 * var(--u))) rotate(-6deg);
 }
 
+/* While fanned out, the gaps between the cards are outside the stack's own box, so the mouse
+   would leave it, the cards would close, and it would flicker. This invisible strip covers the
+   whole spread, gaps included, and only exists while hovered. */
+.polaroid-stack:hover::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(-282 * var(--u));
+  right: calc(-282 * var(--u));
+}
+
 .polaroid-stack:hover .polaroid-about,
 .polaroid-stack:focus-within .polaroid-about {
   transform: translateX(calc(-282 * var(--u)));
