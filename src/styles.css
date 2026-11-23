@@ -1,6 +1,6 @@
 :root {
   /* variables */
-  --page-gutter: 48px;
+  --page-gutter: clamp(24px, 5.56vw, 80px); /* 80px on the 1440px design */
   --cg-black: rgb(30, 32, 32);
   --cg-blue: rgb(36, 94, 255);
   --cg-grey: rgb(243, 243, 243);
@@ -22,7 +22,7 @@ body {
   grid-template-columns: 1fr auto 1fr;   /* left | photo | right */
 
   align-items: center;
-  min-height: 70vh;          /* tall hero, like the mockup */
+  height: clamp(300px, 33.34vw, 480px);   /* 480px tall on the 1440px design, shrinking with the window */
   padding: 0 var(--page-gutter);           /* the gap from the left edge; also used on the right */
   box-sizing: border-box;    /* so the padding doesn't make it wider than 100% */
 }
@@ -45,11 +45,13 @@ body {
   font-weight: lighter;
 }
 
-/* Header photo: a stack of polaroids that fans out on hover or focus */
+/* Header photo: a stack of polaroids that fans out on hover or focus.
+   Sized from the Figma (a 1440px wide page), then shrunk with the window: 1 unit = --u. */
 .polaroid-stack {
+  --u: min(1px, calc(100vw / 1440));
   position: relative;
-  width: 246px;
-  height: 318px;
+  width: calc(246 * var(--u));
+  height: calc(318 * var(--u));
   outline: none;
 }
 
@@ -60,22 +62,23 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 9.84px;
-  padding: 13.12px 13.12px 18.04px;
+  gap: calc(9.84 * var(--u));
+  padding: calc(13.12 * var(--u)) calc(13.12 * var(--u)) calc(18.04 * var(--u));
   background: #fdfcf8;
-  border-radius: 1.64px;
-  filter: drop-shadow(0 8.2px 10.66px rgba(0, 0, 0, 0.16));
+  border-radius: calc(1.64 * var(--u));
+  filter: drop-shadow(0 calc(8.2 * var(--u)) calc(10.66 * var(--u)) rgba(0, 0, 0, 0.16));
   transition: transform 0.4s ease;
 }
 
 .polaroid-photo {
-  width: 219.76px;
-  height: 246px;
+  width: calc(219.76 * var(--u));
+  height: calc(246 * var(--u));
   object-fit: cover;
 }
 
 .polaroid figcaption {
-  font: 24.6px "Caveat", cursive;
+  font-family: "Caveat", cursive;
+  font-size: calc(24.6 * var(--u));
   color: #2a2724;
   white-space: nowrap;
 }
@@ -84,7 +87,8 @@ body {
 div.polaroid-photo {
   display: grid;
   place-items: center;
-  font: 10.66px monospace;
+  font-family: monospace;
+  font-size: calc(10.66 * var(--u));
   color: #5e5a54;
 }
 
@@ -97,21 +101,21 @@ div.polaroid-photo {
 }
 
 .polaroid-about {
-  transform: translate(-30px, 7px) rotate(7deg);
+  transform: translate(calc(-30 * var(--u)), calc(7 * var(--u))) rotate(7deg);
 }
 
 .polaroid-life {
-  transform: translate(30px, 9px) rotate(-6deg);
+  transform: translate(calc(30 * var(--u)), calc(9 * var(--u))) rotate(-6deg);
 }
 
 .polaroid-stack:hover .polaroid-about,
 .polaroid-stack:focus-within .polaroid-about {
-  transform: translateX(-282px);
+  transform: translateX(calc(-282 * var(--u)));
 }
 
 .polaroid-stack:hover .polaroid-life,
 .polaroid-stack:focus-within .polaroid-life {
-  transform: translateX(282px);
+  transform: translateX(calc(282 * var(--u)));
 }
 
 /* Navbar */
