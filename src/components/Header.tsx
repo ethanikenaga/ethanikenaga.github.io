@@ -17,11 +17,20 @@ function Header() {
         </p>
       </div>
 
-      <img
-        className="site-photo"
-        src="/images/me.JPG"
-        alt="A headshot photo of me!"
-      />
+      <div className="polaroid-stack" tabIndex={0}>
+        <figure className="polaroid polaroid-about" aria-hidden="true">
+          <div className="polaroid-photo placeholder-green">+ hobby photo</div>
+          <figcaption>about me</figcaption>
+        </figure>
+        <figure className="polaroid polaroid-life" aria-hidden="true">
+          <div className="polaroid-photo placeholder-blue">+ candid / campus</div>
+          <figcaption>life lately</figcaption>
+        </figure>
+        <figure className="polaroid polaroid-me">
+          <img className="polaroid-photo" src="/images/me.JPG" alt="A headshot photo of me!" />
+          <figcaption>hi, that's me</figcaption>
+        </figure>
+      </div>
 
       <Navbar />
     </header>
