@@ -28,3 +28,6 @@ tools/
 
 # local Claude skills (not part of the site)
 .claude/skills/
+
+# local Claude context (not part of the site)
+CLAUDE.md
