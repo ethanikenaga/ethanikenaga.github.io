@@ -55,12 +55,7 @@ function ProjectDialog({ project, onClose }: Props) {
         <>
           <div className="project-dialog-bar">
             <span>WORK&nbsp; /&nbsp; {project.title.toUpperCase()}</span>
-            <button
-              type="button"
-              className="project-dialog-close"
-              aria-label="Close"
-              onClick={onClose}
-            >
+            <button type="button" className="project-dialog-close" aria-label="Close" onClick={onClose}>
               <img src="/images/ui/close.svg" alt="" width={18} height={18} />
             </button>
           </div>
@@ -124,9 +119,7 @@ function ProjectDialog({ project, onClose }: Props) {
                 className={`project-section${section.image ? ` has-image image-${section.image.side}` : ''}`}
                 key={section.heading}
               >
-                {section.image && (
-                  <div className="project-section-image">{section.image.label}</div>
-                )}
+                {section.image && <div className="project-section-image">{section.image.label}</div>}
                 <div className="project-section-text">
                   <h3>{section.heading}</h3>
                   {section.body.map((text, j) => (

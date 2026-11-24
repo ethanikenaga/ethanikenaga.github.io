@@ -189,14 +189,7 @@ function CardVideo({ src, eager = false }: Props) {
           <Flower petal="#F6A9B3" centre centreFill="#F8C6CD" />
         </svg>
       </div>
-      <video
-        ref={videoRef}
-        className="project-card-art"
-        style={{ opacity: 0 }}
-        muted
-        playsInline
-        preload="auto"
-      >
+      <video ref={videoRef} className="project-card-art" style={{ opacity: 0 }} muted playsInline preload="auto">
         <source src={`${src}.mp4`} type="video/mp4" />
       </video>
     </div>

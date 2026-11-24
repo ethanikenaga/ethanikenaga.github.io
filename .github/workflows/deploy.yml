@@ -24,6 +24,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - run: npx eslint . --max-warnings 0
+      - run: npm run format:check
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
