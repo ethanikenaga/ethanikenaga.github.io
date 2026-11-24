@@ -46,7 +46,8 @@ function Header() {
         onBlur={onBlur}
       >
         <Link className="polaroid polaroid-about" to="/about" aria-label="About" onClick={() => setSpread(false)}>
-          <div className="polaroid-photo placeholder-green">+ hobby photo</div>
+          <img className="polaroid-photo" src="/images/about.jpg" alt="A photo of me" />
+          <span className="polaroid-caption">about</span>
         </Link>
         <Link
           className="polaroid polaroid-expression"
@@ -54,10 +55,16 @@ function Header() {
           aria-label="Expression"
           onClick={() => setSpread(false)}
         >
-          <div className="polaroid-photo placeholder-blue">+ candid / campus</div>
+          <img
+            className="polaroid-photo"
+            src="/images/expression.jpg"
+            alt="Two pink cosmos flowers, one with a bee on it"
+          />
+          <span className="polaroid-caption">expression</span>
         </Link>
         <Link className="polaroid polaroid-work" to="/" aria-label="Work" onClick={() => setSpread(false)}>
-          <img className="polaroid-photo" src="/images/me.JPG" alt="A headshot photo of me!" />
+          <img className="polaroid-photo" src="/images/me-selfie.jpg" alt="A headshot photo of me!" />
+          <span className="polaroid-caption">work</span>
         </Link>
       </div>
 
