@@ -168,7 +168,7 @@ function CardVideo({ src, eager = false }: Props) {
       observer.disconnect()
       resize.disconnect()
     }
-  }, [])
+  }, [eager])
 
   return (
     <div className="card-scene" ref={wrapRef} aria-hidden="true">
