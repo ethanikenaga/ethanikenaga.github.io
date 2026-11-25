@@ -3,7 +3,7 @@
   --page-gutter: 5rem; /* 80px on the 1440px design */
   --cg-black: rgb(30, 32, 32);
   --cg-blue: rgb(36, 94, 255);
-  --cg-grey: rgb(243, 243, 243);
+  --cream: #f7f4ee; /* the page and header background in the Figma */
   --cg-white: rgb(255, 255, 255);
 }
 
@@ -17,12 +17,33 @@ html {
 }
 
 body {
-  background: var(--cg-grey);
+  background: var(--cream);
   position: relative;
   min-height: 100vh;
   padding: 0;
   margin: 0;
   font-family: 'Quicksand', sans-serif;
+}
+
+/* The Figma's 40px dot grid. It is full strength behind the header, then fades out as it runs down
+   past the divider into the page, instead of being cut off. It sits behind everything, so the
+   header's glow, the cards and the footer all cover it.
+   The rows of dots are at 60px, 100px ... 460px, 500px, so the divider at 480px runs between two
+   rows instead of through one. */
+body::before {
+  content: '';
+  position: absolute;
+  top: 2.5rem;
+  left: 0;
+  right: 0;
+  height: 41.5rem;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(31, 30, 28, 0.13) 0.0688rem, transparent 0.0938rem);
+  background-size: 2.5rem 2.5rem;
+  background-position: 1.25rem 0;
+  -webkit-mask-image: linear-gradient(to bottom, #000 36%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 36%, transparent 100%);
 }
 
 /* ===== Site header ===== */
@@ -35,24 +56,14 @@ body {
   padding: 0 var(--page-gutter); /* the gap from the left edge; also used on the right */
   box-sizing: border-box; /* so the padding doesn't make it wider than 100% */
 
-  /* Figma header backdrop: cream, a 40px dot grid, and a soft peach glow behind the polaroid.
-     Backgrounds clip to the header, so none of it shows on the page below. */
-  background-color: #f7f4ee;
-  background-image:
-    radial-gradient(circle, rgba(31, 30, 28, 0.13) 0.0688rem, transparent 0.0938rem),
-    radial-gradient(
-      ellipse 47% 62% at 50% 49%,
-      rgba(255, 201, 168, 0.38) 0%,
-      rgba(255, 201, 168, 0.22) 50%,
-      rgba(255, 201, 168, 0) 100%
-    );
-  background-size:
-    2.5rem 2.5rem,
-    100% 100%;
-  background-position:
-    1.25rem 1.25rem,
-    0 0;
-  background-repeat: repeat, no-repeat;
+  /* Figma header backdrop: a soft peach glow behind the polaroid. It clips to the header, so it
+     doesn't show on the page below. The dot grid behind it comes from the body. */
+  background-image: radial-gradient(
+    ellipse 47% 62% at 50% 49%,
+    rgba(255, 201, 168, 0.38) 0%,
+    rgba(255, 201, 168, 0.22) 50%,
+    rgba(255, 201, 168, 0) 100%
+  );
 }
 
 .site-name {
@@ -106,7 +117,9 @@ body {
   display: flex;
   flex-wrap: wrap; /* on a very narrow window the row wraps instead of running into the polaroids */
   align-items: center;
-  margin-top: 1rem;
+  /* the first link has --link-pad of padding on its left, so pull the row left by that much and
+     its text lines up with the name and the blurb above */
+  margin: 1rem 0 0 calc(-1 * var(--link-pad));
 }
 
 /* The left column shrinks with the window; keep a gap between it and the tilted polaroid */
