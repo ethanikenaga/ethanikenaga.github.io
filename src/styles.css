@@ -1,19 +1,49 @@
 :root {
   /* variables */
-  --page-gutter: clamp(24px, 5.56vw, 80px); /* 80px on the 1440px design */
+  --page-gutter: 5rem; /* 80px on the 1440px design */
   --cg-black: rgb(30, 32, 32);
   --cg-blue: rgb(36, 94, 255);
-  --cg-grey: rgb(243, 243, 243);
+  --cream: #f7f4ee; /* the page and header background in the Figma */
   --cg-white: rgb(255, 255, 255);
 }
 
+/* The whole page scales with the window. The site is designed at 1440px wide, where 1rem is 16px.
+   On narrower windows 1rem shrinks in step, so every size written in rem (text, spacing, the
+   header, the cards) shrinks with it, down to 60% of full size. The line before the next one is
+   the fallback for browsers that can't do the maths. */
+html {
+  font-size: 16px;
+  font-size: calc(16px * clamp(0.6, tan(atan2(100vw, 1440px)), 1));
+}
+
 body {
-  background: var(--cg-grey);
+  background: var(--cream);
   position: relative;
   min-height: 100vh;
   padding: 0;
   margin: 0;
   font-family: 'Quicksand', sans-serif;
+}
+
+/* The Figma's 40px dot grid. It is full strength behind the header, then fades out as it runs down
+   past the divider into the page, instead of being cut off. It sits behind everything, so the
+   header's glow, the cards and the footer all cover it.
+   The rows of dots are at 60px, 100px ... 460px, 500px, so the divider at 480px runs between two
+   rows instead of through one. */
+body::before {
+  content: '';
+  position: absolute;
+  top: 2.5rem;
+  left: 0;
+  right: 0;
+  height: 41.5rem;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(31, 30, 28, 0.13) 0.0688rem, transparent 0.0938rem);
+  background-size: 2.5rem 2.5rem;
+  background-position: 1.25rem 0;
+  -webkit-mask-image: linear-gradient(to bottom, #000 36%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 36%, transparent 100%);
 }
 
 /* ===== Site header ===== */
@@ -22,29 +52,155 @@ body {
   grid-template-columns: 1fr auto 1fr; /* left | photo | right */
 
   align-items: center;
-  height: clamp(300px, 33.34vw, 480px); /* 480px tall on the 1440px design, shrinking with the window */
+  height: 30rem; /* 480px tall on the 1440px design; rem shrinks with the window, see html above */
   padding: 0 var(--page-gutter); /* the gap from the left edge; also used on the right */
   box-sizing: border-box; /* so the padding doesn't make it wider than 100% */
+
+  /* Figma header backdrop: a soft peach glow behind the polaroid. It clips to the header, so it
+     doesn't show on the page below. The dot grid behind it comes from the body. */
+  background-image: radial-gradient(
+    ellipse 47% 62% at 50% 49%,
+    rgba(255, 201, 168, 0.38) 0%,
+    rgba(255, 201, 168, 0.22) 50%,
+    rgba(255, 201, 168, 0) 100%
+  );
 }
 
 .site-name {
-  margin: 5px 0 0;
-  font-size: 40px;
+  margin: 0.3125rem 0 0;
+  font-size: 2.5rem;
+}
+
+/* Small orange label above the blurb, e.g. "01 / WORK" */
+.site-eyebrow {
+  margin: 0.75rem 0 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ff7a45;
 }
 
 .site-tagline {
-  margin: 4px 0 0;
-  font-size: 14px;
-  font-weight: lighter;
+  max-width: 18.75rem;
+  min-height: 3em; /* two lines, so nothing below jumps while the text is loading */
+  margin: 0.375rem 0 0;
+  font-size: 0.875rem;
+  font-weight: normal;
+  line-height: 1.5;
+  color: #5c5953;
+}
+
+/* The blurb scrambles into place when the page changes (see ScrambleText) */
+.scramble-wrap {
+  position: relative;
+  display: block;
+}
+
+/* An invisible copy of the new text, only used to measure where each letter sits */
+.scramble-measure {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.scramble-scrambling {
+  opacity: 0.4;
+}
+
+/* Résumé / GitHub / LinkedIn / Email, in small mono caps with thin dividers between them */
+.site-links {
+  --link-pad: 0.875rem;
+  display: flex;
+  flex-wrap: wrap; /* on a very narrow window the row wraps instead of running into the polaroids */
+  align-items: center;
+  /* the first link has --link-pad of padding on its left, so pull the row left by that much and
+     its text lines up with the name and the blurb above */
+  margin: 1rem 0 0 calc(-1 * var(--link-pad));
+}
+
+/* The left column shrinks with the window; keep a gap between it and the tilted polaroid */
+.site-intro {
+  min-width: 0;
+  padding-right: 1.5rem;
+}
+
+.site-links a,
+.site-links button {
+  padding: 0.75rem var(--link-pad);
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(31, 30, 28, 0.6);
+  transition: color 0.2s ease;
+}
+
+.site-links a:first-child {
+  color: #1f1e1c;
+}
+
+.site-links a:hover,
+.site-links a:focus-visible,
+.site-links button:hover,
+.site-links button:focus-visible {
+  color: #1f1e1c;
+}
+
+.site-links a + a,
+.site-links a + button {
+  border-left: 1px solid rgba(31, 30, 28, 0.22);
+  padding-block: 0;
+  line-height: 0.875rem;
+}
+
+/* Wide enough for "Copied" so the row doesn't shift when the label changes */
+.site-links button {
+  min-width: calc(4.2em + 2 * var(--link-pad));
+  text-align: left;
+}
+
+/* On very small windows the row wraps onto two lines, so drop the dividers and even out the rows */
+@media (max-width: 640px) {
+  .site-links a,
+  .site-links button,
+  .site-links a + a,
+  .site-links a + button {
+    border-left: none;
+    padding-block: 0.5rem;
+    line-height: normal;
+  }
+}
+
+/* Letters that are still scrambling are dimmer than settled ones */
+.site-links button .is-scrambling {
+  opacity: 0.4;
+}
+
+/* Text for screen readers only */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 /* Header photo: a stack of polaroids. They fan out into a row while the mouse is over them, and
    fall back into a stack when one is clicked. The polaroid for the current page sits on top.
-   Sized from the Figma (a 1440px wide page), then shrunk with the window: 1 unit = --u.
+   Sized from the Figma (a 90rem wide page), then shrunk with the window: 1 unit = --u.
    --polaroid-size is the one number to change: 1 is the Figma size, 0.7 is 70% of it. */
 .polaroid-stack {
   --polaroid-size: 0.7;
-  --u: calc(min(1px, 100vw / 1440) * var(--polaroid-size));
+  --u: calc(0.0625rem * var(--polaroid-size)); /* 1px on the 1440px design */
   /* the two tilted poses of the cards that sit under the top one */
   --tilt-a: translate(calc(-30 * var(--u)), calc(7 * var(--u))) rotate(7deg);
   --tilt-b: translate(calc(30 * var(--u)), calc(9 * var(--u))) rotate(-6deg);
@@ -161,7 +317,7 @@ div.polaroid-photo {
   list-style: none;
   text-align: right;
 
-  gap: 20px;
+  gap: 1.25rem;
   padding: 0;
   margin: 0;
 }
@@ -170,9 +326,9 @@ div.polaroid-photo {
   color: var(--cg-black);
   font-weight: normal;
   text-decoration: none;
-  letter-spacing: 3px;
+  letter-spacing: 0.1875rem;
 
-  font-size: 20px;
+  font-size: 1.25rem;
   font-family: 'Quicksand', sans-serif;
 
   display: inline-block;
@@ -180,14 +336,14 @@ div.polaroid-photo {
     transform 0.5s ease,
     color 0.5s ease;
 
-  padding: 4px 8px 4px 10px;
-  border-radius: 8px;
-  margin-right: -11px;
+  padding: 0.25rem 0.5rem 0.25rem 0.625rem;
+  border-radius: 0.5rem;
+  margin-right: -0.6875rem;
 }
 
 .navbar a:hover {
   color: var(--cg-blue);
-  transform: translateX(-8px);
+  transform: translateX(-0.5rem);
   background-color: rgba(36, 94, 255, 0.1); /* --cg-blue at 10% opacity */
 }
 
@@ -197,7 +353,7 @@ div.polaroid-photo {
 }
 
 main {
-  padding: 40px var(--page-gutter) 80px;
+  padding: 2.5rem var(--page-gutter) 5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -207,7 +363,7 @@ main {
 .page-title {
   display: flex;
   justify-content: center;
-  font-size: 40px;
+  font-size: 2.5rem;
   font-family: 'Quicksand', sans-serif;
 }
 
@@ -223,8 +379,8 @@ main {
 @keyframes page-in {
   from {
     opacity: 0;
-    transform: translateY(24px);
-    filter: blur(4px);
+    transform: translateY(1.5rem);
+    filter: blur(0.25rem);
   }
 }
 
@@ -244,7 +400,7 @@ main {
 @keyframes card-in {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(1.5rem);
   }
 }
 
@@ -271,7 +427,7 @@ main {
 .project-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 32px;
+  gap: 2rem;
 }
 
 @media (max-width: 720px) {
@@ -289,7 +445,7 @@ main {
   font: inherit;
   text-align: left;
   aspect-ratio: 624 / 380;
-  border-radius: 22px;
+  border-radius: 1.375rem;
   overflow: hidden;
 }
 
@@ -298,8 +454,8 @@ main {
 }
 
 .project-card-button:focus-visible {
-  outline: 3px solid var(--cg-blue);
-  outline-offset: 4px;
+  outline: 0.1875rem solid var(--cg-blue);
+  outline-offset: 0.25rem;
 }
 
 .project-card-art {

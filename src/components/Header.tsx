@@ -1,6 +1,8 @@
 import { useState, type FocusEvent } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import CopyEmailButton from './CopyEmailButton.tsx'
 import Navbar from './Navbar.tsx'
+import ScrambleText from './ScrambleText.tsx'
 
 // Which polaroid is on top of the pile follows the page you are on
 function topPolaroid(pathname: string) {
@@ -9,8 +11,16 @@ function topPolaroid(pathname: string) {
   return 'work'
 }
 
+// The small text under the name changes with the page, like the polaroid on top of the pile
+const blurbs = {
+  work: { label: '01 / work', text: "Projects I've built and the experiences that shaped how I work." },
+  about: { label: '02 / about', text: 'A Cal Poly student who likes good design and building useful things.' },
+  expression: { label: '03 / expression', text: 'Photos, drawings and small experiments I make for fun.' },
+}
+
 function Header() {
   const { pathname } = useLocation()
+  const blurb = blurbs[topPolaroid(pathname)]
   // The pile fans out while the mouse is over it (or a card has keyboard focus), and falls back
   // into a stack when you click a card, until the mouse leaves and comes back.
   const [spread, setSpread] = useState(false)
@@ -30,11 +40,24 @@ function Header() {
           <br />
           ikenaga
         </h1>
-        <p className="site-tagline">
-          Designing tools to make
-          <br />
-          the world a better place.
+        <p className="site-eyebrow" aria-live="polite">
+          <ScrambleText text={blurb.label} />
         </p>
+        <p className="site-tagline" aria-live="polite">
+          <ScrambleText text={blurb.text} />
+        </p>
+        <nav className="site-links" aria-label="Links">
+          <a href="/files/resume.pdf" target="_blank" rel="noreferrer">
+            Résumé
+          </a>
+          <a href="https://github.com/ethanikenaga" target="_blank" rel="noreferrer">
+            GitHub
+          </a>
+          <a href="https://linkedin.com/in/ethanikenaga" target="_blank" rel="noreferrer">
+            LinkedIn
+          </a>
+          <CopyEmailButton />
+        </nav>
       </div>
 
       <div
