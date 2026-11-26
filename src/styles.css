@@ -20,6 +20,8 @@ body {
   background: var(--cream);
   position: relative;
   min-height: 100vh;
+  display: flex; /* a column, so the footer can sit at the bottom of a short page */
+  flex-direction: column;
   padding: 0;
   margin: 0;
   font-family: 'Quicksand', sans-serif;
@@ -835,17 +837,127 @@ body:has(.project-dialog[open]) {
   }
 }
 
-/* CSS for footer */
-
+/* ===== Footer =====
+   A technical caption in the header's style, on the page's own cream background: a hairline,
+   the logo and name on the left, icon links on the right, and a measurement line with the
+   changelog link under them. It is 150px tall on the 1440px design. */
 .footer {
+  --footer-line: rgba(31, 30, 28, 0.22);
+  margin: auto var(--page-gutter) 0; /* auto top margin pushes it to the bottom of a short page */
+  padding: 1.5rem 0 1.5rem;
+  border-top: 1px solid rgb(220, 220, 220); /* same line as the divider under the header */
+  font-family: 'DM Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.footer-row {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  background-color: var(--cg-black);
-  color: var(--cg-white);
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+}
+
+.footer-id {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* The logo is a button: clicking it scrolls back to the top */
+.footer-mark {
+  display: block;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin-left: -0.1rem; /* the logo's crop marks sit a little inside its box; line them up with the margin */
+}
+
+.footer-mark img {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+}
+
+.footer-name,
+.footer-sub {
+  margin: 0;
+}
+
+.footer-name {
+  font-size: 0.6875rem;
+  line-height: 1.125rem;
+  color: #1f1e1c;
+}
+
+.footer-sub {
+  font-size: 0.625rem;
+  line-height: 1rem;
+  color: #6b675f;
+}
+
+/* Résumé / GitHub / LinkedIn / Email, each in a thin outlined square */
+.footer-links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.footer-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
   height: 2.5rem;
-  z-index: 20;
+  box-sizing: border-box;
+  border: 1px solid var(--footer-line);
+  color: #1f1e1c;
+  transition: border-color 0.2s ease;
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  border-color: #1f1e1c;
+}
+
+/* The measurement line: a hairline with a tick at each end and the label in the middle */
+.footer-dimension {
+  display: flex;
+  align-items: center;
+  margin-top: 1.25rem;
+}
+
+.footer-line {
+  position: relative;
+  flex: 1;
+  height: 1px;
+  background: var(--footer-line);
+}
+
+.footer-line:first-child::before,
+.footer-line:last-child::before {
+  content: '';
+  position: absolute;
+  top: -0.375rem;
+  width: 1px;
+  height: 0.8125rem;
+  background: var(--footer-line);
+}
+
+.footer-line:first-child::before {
+  left: 0;
+}
+
+.footer-line:last-child::before {
+  right: 0;
+}
+
+.footer-changelog {
+  position: relative; /* holds the screen-reader copy of the text, which is positioned inside it */
+  padding: 0 0.5rem;
+  font-size: 0.625rem;
+  line-height: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  color: #1f1e1c;
+  white-space: nowrap;
 }
